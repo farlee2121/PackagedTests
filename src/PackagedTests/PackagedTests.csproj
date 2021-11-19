@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<Version>1.0.11</Version>
+		<Version>1.0.12</Version>
 		<!--<NuspecFile>PackagedTests.nuspec</NuspecFile>-->
 
 		<!--<EmbedAllSources>true</EmbedAllSources>-->
@@ -14,18 +14,19 @@
 		<!--<SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
 		<!--<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>-->
 		<IsPackable>true</IsPackable>
-		<!--<IncludeContentInPack>true</IncludeContentInPack>-->
-		<!--<ContentTargetFolders>content</ContentTargetFolders>-->
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<ContentTargetFolders>contentFiles</ContentTargetFolders>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Include="UnitTest1.cs">
+		<Compile Update="@(Compile)">
 			<Pack>true</Pack>
-		</None>
+			<PackagePath>contentFiles/cs/net5.0/$(PackageId)\</PackagePath>
+		</Compile>
 	</ItemGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
-	</ItemGroup>
+	</ItemGroup>-->
 	<ItemGroup>
 		
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />

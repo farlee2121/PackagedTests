@@ -78,20 +78,33 @@ this looks promising
 - https://medium.com/@attilah/source-code-only-nuget-packages-8f34a8fb4738
 - !!! it points out you can use Directory.Build.props for drag and drop adoption of complex csproj/build file properties
    - Could probably also use this to make the configuration available as a nuget package?
+   - yup, just have to add it to the `build` nuget folder https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package#from-a-convention-based-working-directory
 
 Adding `<Pack>true</pack>` to a content item does generate a nuspec with that Item as a contentFile, but it does not copy the user consumer project
 
+looks like the old `files` nuspec api does not work with net core projects
+- https://github.com/NuGet/Home/issues/6548
+- contentFiles is supposed to replace it, but the docs are very old and not very clear. The behaviors seem to not be as expected
 
 ### Revisiting my options (because this is a hot mess)
 
 Debugging
 - OPT: debug type embed
-   - pro: 
+   - pro: code available by default
+   - con: cant' seem to navigate to the code without debugger
 - opt: symbol servers
 
 Source
 - source link
+  - con: doesnt' seem to support normal code navigation, only debug stepping
+  - con: doesn't seem to have any benefits over embedded debug type for my purpose
 - copy content to consumer project using nuspec
   - con: requires less standard package commands, but still doable with dotnet cli
   - pro: content available in target project browser
+  - pro: might invalidate the need to embed pdbs
+  - con: i think this isn't possible with .net core 
 - count on end project to copy files out of the package
+
+
+At last! progress based on https://medium.com/@attilah/source-code-only-nuget-packages-8f34a8fb4738
+- the main problem is that the source code links are only visible in VisualStudio. other editors like vs code are just out of luck (though debug might still work? haven't tried)

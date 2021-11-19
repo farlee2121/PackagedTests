@@ -2,17 +2,21 @@
 <package> 
   <metadata minClientVersion="3.3.0"> 
     <id>ContentFilesExample</id> 
-    <version>1.0.11</version> 
+    <version>1.0.13</version> 
     <authors>nuget</authors> <!-- The NuGet team authored this package --> 
     <owners>nuget</owners> <!-- The NuGet team owns this package --> 
     <requireLicenseAcceptance>false</requireLicenseAcceptance> 
     <description>A content v2 example package.</description> 
     <tags>contentv2 contentFiles</tags> 
-    <!-- Build actions for items in the contentFiles folder --> 
-    
+    <!-- Build actions for items in the contentFiles folder -->
+
 	  <!--https://stackoverflow.com/questions/52880687/how-to-share-source-code-via-nuget-packages-for-use-in-net-core-projects-->
+	  <contentFiles>
+		  <!-- Include Assets as Content -->
+		  <files include="**/*.cs" buildAction="Content" />
+	  </contentFiles>
    </metadata> 
-   <files>
-    <file src="contentFiles/any/net5.0/UnitTests.cs" target="contentFiles/any/net5.0/Tests"/>
-   </files>
+   <!--<files>
+    <file src="**/*.cs" target="content/tests"/>
+   </files>-->
 </package>
