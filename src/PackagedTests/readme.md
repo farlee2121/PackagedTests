@@ -2,8 +2,9 @@
 
 Goals
 - package acceptance tests for others to run
-- consumers should be able to see source within their project
+- consumers should be able to see specified source files within their project
 - consumers should be able to debug the tests as if they were local
+- consumers should not be able to edit packaged source files
 
 
 ## packaging test projects
